@@ -11,8 +11,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class BTCUSDTController {
 
+    private final BTCUSDTService service;
+
     @Autowired
-    private BTCUSDTService servise;
+    public BTCUSDTController(BTCUSDTService service) {
+        this.service = service;
+    }
 
     @GetMapping(path = "/dapi/v1/depth",
             consumes = MediaType.APPLICATION_JSON_VALUE,
@@ -21,6 +25,6 @@ public class BTCUSDTController {
             @RequestParam String symbol,
             @RequestParam(required = false, defaultValue = "500") String limit
             ){
-        return servise.getOrderBook();
+        return service.getOrderBook();
     }
 }
